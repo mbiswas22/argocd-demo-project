@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: { { include "demo-chart.fullname" . } }
+  labels:
+    app: nodeApp
+spec:
+  replicas: { { .Values.replicaCount } }
+  selector:
+    matchLabels:
+      app: nodeApp
+  template:
+    metadata:
+      labels:
+        app: nodeApp
+    spec:
+      containers:
+        - name: { { .Chart.Name } }
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: { { .Values.image.pullPolicy } }
+          ports:
+            - name: http
+              containerPort: { { .Values.service.port } }
+              protocol: TCP
+          volumeMounts:
+            - name: app-code
+          mountPath: /usr/src/app
+      volumes:
+        - name: app-code
+          hostPath:
+            path: C:\Users\dsirc\Desktop\Moutusi\Training\Repo\my-argocd-demo # Replace with full path
+
