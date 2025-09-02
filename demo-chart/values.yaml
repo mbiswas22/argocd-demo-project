@@ -15,4 +15,4 @@ service:
   name: demo-service
   type: NodePort
   port: 3000
-  # targetPort: 9000
+  targetPort: 9000
