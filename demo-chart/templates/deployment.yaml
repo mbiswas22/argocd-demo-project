@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: { { include "demo-chart.fullname" . } }
+  name: { { .Release.Name }}-nodeApp
   labels:
     app: nodeApp
 spec:
