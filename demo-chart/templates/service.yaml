@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: { { .Release.Name} }-service
+  name: nodeAppservice
 spec:
   type: { { .Values.service.type } }
   ports:
     - port: { { .Values.service.port } }
-      targetPort: {{ .Values.service.targetPort }}
-      protocol: {{ .Values.service.protocol | default "TCP" }}
+      targetPort: { { .Values.service.targetPort } }
+      protocol: { { .Values.service.protocol | default "TCP" } }
       name: http
   # app.kubernetes.io/instance: {{ .Release.Name }}
