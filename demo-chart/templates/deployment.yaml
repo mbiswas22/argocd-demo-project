@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-app
+  name: nodeapp
   labels:
-    app: node-app
+    app: nodeapp
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: node-app
+      app: nodeapp
   template:
     metadata:
       labels:
-        app: node-app
+        app: nodeapp
     spec:
       containers:
         - name: {{ .Chart.Name }}
