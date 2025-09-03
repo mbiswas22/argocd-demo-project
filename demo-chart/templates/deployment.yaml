@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nodeApp
 spec:
-  replicas: { { .Values.replicaCount } }
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: nodeApp
@@ -15,12 +15,12 @@ spec:
         app: nodeApp
     spec:
       containers:
-        - name: { { .Chart.Name } }
+        - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: { { .Values.image.pullPolicy } }
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: { { .Values.service.port } }
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           volumeMounts:
             - name: app-code
