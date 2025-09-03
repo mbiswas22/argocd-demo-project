@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: nodeapp-test
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"          # <-- same image you were using before
+          image: nginx:alpine          # <-- same image you were using before
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
