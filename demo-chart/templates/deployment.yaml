@@ -28,5 +28,5 @@ spec:
       volumes:
         - name: app-code
           hostPath:
-            path: C:\Users\dsirc\Desktop\Moutusi\Training\Repo\my-argocd-demo # Replace with full path
+            path: /run/desktop/mnt/host/c/Users/dsirc/Desktop/Moutusi/Training/Repo/my-argocd-demo # Replace with full path
 
