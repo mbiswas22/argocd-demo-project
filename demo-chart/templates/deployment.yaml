@@ -1,27 +1,52 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-app
+  name: nodeapp-test
   labels:
-    app: node-app
+    app: nodeapp-test
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
-      app: node-app
+      app: nodeapp-test
   template:
     metadata:
       labels:
-        app: node-app
+        app: nodeapp-test
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: nodeapp-test
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"          # <-- same image you were using before
+          imagePullPolicy: IfNotPresent
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.service.port }}              # <-- adjust to whatever your app listens on
               protocol: TCP
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: node-app
+#   labels:
+#     app: node-app
+# spec:
+#   replicas: {{ .Values.replicaCount }}
+#   selector:
+#     matchLabels:
+#       app: node-app
+#   template:
+#     metadata:
+#       labels:
+#         app: node-app
+#     spec:
+#       containers:
+#         - name: {{ .Chart.Name }}
+#           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+#           imagePullPolicy: {{ .Values.image.pullPolicy }}
+#           ports:
+#             - name: http
+#               containerPort: {{ .Values.service.port }}
+#               protocol: TCP
       #     volumeMounts:
       #       - name: app-code
       #         mountPath: /usr/src/app
