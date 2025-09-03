@@ -1,57 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodeapp-test
+  name: node-app
   labels:
-    app: nodeapp-test
+    app: node-app
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: nodeapp-test
+      app: node-app
   template:
     metadata:
       labels:
-        app: nodeapp-test
+        app: node-app
     spec:
       containers:
-        - name: nodeapp-test
-          image: nginx:alpine          # <-- same image you were using before
-          imagePullPolicy: IfNotPresent
+        - name: {{ .Chart.Name }}
+          image: nginx:alpine
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}              # <-- adjust to whatever your app listens on
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
-
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: node-app
-#   labels:
-#     app: node-app
-# spec:
-#   replicas: {{ .Values.replicaCount }}
-#   selector:
-#     matchLabels:
-#       app: node-app
-#   template:
-#     metadata:
-#       labels:
-#         app: node-app
-#     spec:
-#       containers:
-#         - name: {{ .Chart.Name }}
-#           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-#           imagePullPolicy: {{ .Values.image.pullPolicy }}
-#           ports:
-#             - name: http
-#               containerPort: {{ .Values.service.port }}
-#               protocol: TCP
-      #     volumeMounts:
-      #       - name: app-code
-      #         mountPath: /usr/src/app
-      # volumes:
-      #   - name: app-code
-      #     hostPath:
-      #       path: /run/desktop/mnt/host/c/Users/dsirc/Desktop/Moutusi/Training/Repo/my-argocd-demo # Replace with full path
+          volumeMounts:
+            - name: app-code
+              mountPath: /usr/src/app
+      volumes:
+        - name: app-code
+          hostPath:
+            path: /run/desktop/mnt/host/c/Users/dsirc/Desktop/Moutusi/Training/Repo/my-argocd-demo # Replace with full path
 
