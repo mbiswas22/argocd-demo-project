@@ -24,7 +24,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: app-code
-              mountPath: /run/desktop/mnt/host/c/temp/data
+              mountPath: /usr/src/app
       volumes:
         - name: app-code
           hostPath:
