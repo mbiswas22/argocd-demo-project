@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodeapp
+  name: node-app
   labels:
-    app: nodeapp
+    app: node-app
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: nodeapp
+      app: node-app
   template:
     metadata:
       labels:
-        app: nodeapp
+        app: node-app
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -24,7 +24,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: app-code
-          mountPath: /run/desktop/mnt/host/c/temp/data
+              mountPath: /usr/src/app
       volumes:
         - name: app-code
           hostPath:
